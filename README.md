@@ -2,7 +2,7 @@
 
 Website Name : JobNest
 
-Live Site URL: https://jobnest100.netlify.app/
+Live Site URL:jobnest-rho.vercel.app
 
 ## Project Overview
 JobNest is a comprehensive job listing platform that provides users with access to a diverse range of job opportunities, categorized into On-Site, Remote, Hybrid, and Part-Time roles. The project aims to simplify the job search process by offering a user-friendly interface and personalized experience, ensuring data security and a consistent experience across all devices.
