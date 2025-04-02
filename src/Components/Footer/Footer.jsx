@@ -27,10 +27,7 @@ const Footer = () => {
                 </nav>
             </footer>
             <footer className="footer px-10 py-4 border-t bg-base-200 text-base-content border-base-300">
-                <aside className="items-center grid-flow-col">
-                    <img src="https://i.ibb.co/hZ9VcF6/logo.png" className="h-20 w-20" alt="" />
-                    <p><span className="text-sky-600">JOB NEST </span><br /><span>Copyright © 2008-2024, JobNest LLC</span></p>
-                </aside>
+                
                 <nav className="md:place-self-center md:justify-self-end">
                     
                 </nav>
