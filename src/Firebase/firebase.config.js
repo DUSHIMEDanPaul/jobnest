@@ -1,21 +1,23 @@
-// Import the functions you need from the SDKs you need
+// Import Firebase modules properly
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getAnalytics } from "firebase/analytics";
 
-// Your web app's Firebase configuration
+// Firebase configuration
 const firebaseConfig = {
-apiKey:import.meta.env.VITE_apiKey,
-authDomain:import.meta.env.VITE_authDomain,
-projectId:import.meta.env.VITE_projectId,
-storageBucket:import.meta.env.VITE_storageBucket,
-messagingSenderId:import.meta.env.VITE_messagingSenderId,
-appId:import.meta.env.VITE_appId
+  apiKey: "AIzaSyAuhDEg07QtAUwrSwArCehV0Rh0LXOvjCA",
+  authDomain: "jobnest-83ff5.firebaseapp.com",
+  projectId: "jobnest-83ff5",
+  storageBucket: "jobnest-83ff5.appspot.com", // Fixed incorrect domain
+  messagingSenderId: "1059142940358",
+  appId: "1:1059142940358:web:119d9569112cc2462bc9c7",
+  measurementId: "G-YMN379TDW6"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// Initialize Firebase Authentication and get a reference to the service
-const auth = getAuth(app);
+const auth = getAuth(app);  // Correctly initializing Firebase Auth
+const analytics = getAnalytics(app);
+
+// Export auth properly
 export default auth;
