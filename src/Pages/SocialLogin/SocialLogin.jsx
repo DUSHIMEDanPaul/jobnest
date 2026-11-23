@@ -1,3 +1,4 @@
+import { API_URL } from '../../api';
 import { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -11,7 +12,7 @@ const SocialLogin = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const from = location?.state || "/";
+    const from = location.state?.from?.pathname || "/";
     const handleSocialLogin = (socialProvider) => {
         socialProvider().then((result) => {
             if (result.user) {
@@ -20,7 +21,7 @@ const SocialLogin = () => {
             const email = result.user?.email;
             const createdAt = result.user?.metadata?.creationTime;
             const user = { email: email, createdAt: createdAt };
-            fetch('https://job-nest-server-zeta.vercel.app', {
+            fetch(API_URL, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'

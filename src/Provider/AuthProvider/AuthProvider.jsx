@@ -21,10 +21,18 @@ const AuthProvider = ({ children }) => {
     const googleProvider = new GoogleAuthProvider();
     const githubProvider = new GithubAuthProvider();
 
+    // onAuthStateChanged only fires on success, so a failed attempt must
+    // clear the loading flag itself or protected routes spin forever.
+    const withLoading = (promise) =>
+        promise.catch((error) => {
+            setLoading(false);
+            throw error;
+        });
+
     // Create user with email and password
     const createUser = (email, password) => {
         setLoading(true);
-        return createUserWithEmailAndPassword(auth, email, password);
+        return withLoading(createUserWithEmailAndPassword(auth, email, password));
     };
 
     // update
@@ -43,19 +51,19 @@ const AuthProvider = ({ children }) => {
     // Sign in user with email and password
     const signInUser = (email, password) => {
         setLoading(true);
-        return signInWithEmailAndPassword(auth, email, password);
+        return withLoading(signInWithEmailAndPassword(auth, email, password));
     };
 
     // Google login
     const googleLogin = () => {
         setLoading(true);
-        return signInWithPopup(auth, googleProvider);
+        return withLoading(signInWithPopup(auth, googleProvider));
     };
 
     // GitHub login
     const githubLogin = () => {
         setLoading(true);
-        return signInWithPopup(auth, githubProvider);
+        return withLoading(signInWithPopup(auth, githubProvider));
     };
 
     // Logout

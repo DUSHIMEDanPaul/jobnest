@@ -1,10 +1,11 @@
+import { API_URL } from '../../api';
 import { useContext, useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../Provider/AuthProvider/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 
-const Modal = ({ onClose, deadline, loggedInUserInfo }) => {
+const Modal = ({ onClose, deadline, loggedInUserInfo, jobId, jobTitle }) => {
     const { user } = useContext(AuthContext)
     const [resumeLink, setResumeLink] = useState('');
     const [email, setEmail] = useState(user?.email || 'user@email.com');
@@ -49,10 +50,13 @@ const Modal = ({ onClose, deadline, loggedInUserInfo }) => {
         }
         try {
             // send data to server
-            const response = await axios.post('https://job-nest-server-zeta.vercel.app/apply', {
+            const response = await axios.post(`${API_URL}/apply`, {
                 name: name,
                 email: email,
-                resumeLink: resumeLink
+                resumeLink: resumeLink,
+                jobId,
+                jobTitle,
+                appliedAt: new Date().toISOString(),
             });
             // console.log('Server response:', response.data);
             Swal.fire({

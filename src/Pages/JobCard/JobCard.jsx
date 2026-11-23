@@ -37,7 +37,7 @@ const JobCard = ({ job }) => {
                             <span>Applicants Number: {applicantsNumber}</span>
                         </div>
                         <div className="mx-1 text-xs text-gray-600 dark:text-sky-950">
-                            <span>Salary Range: {salaryRange}</span>
+                            <span>Salary Range: {salaryRange ?? job.salary_range}</span>
                         </div>
                     </div>
                 </div>

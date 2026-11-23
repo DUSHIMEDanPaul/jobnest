@@ -19,8 +19,9 @@ JobNest is a comprehensive job listing platform that provides users with access 
 - MongoDB
 
 ## How to Run Locally
-1. Clone the repository: `https://github.com/Idba1/job-portal-client-side.git`
+1. Clone the repository: `git clone https://github.com/DUSHIMEDanPaul/jobnest.git`
 2. Navigate to the project directory: `cd jobnest`
 3. Install dependencies: `npm install`
-4. Start the development server: `npm start`
-5. Firebase API KEY
+4. (Optional) Copy `.env.example` to `.env` and set `VITE_API_URL` to use a different backend. It defaults to the hosted JobNest server.
+5. Start the development server: `npm run dev`
+6. Build for production: `npm run build`

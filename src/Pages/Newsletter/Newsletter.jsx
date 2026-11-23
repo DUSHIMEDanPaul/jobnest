@@ -1,3 +1,4 @@
+import { API_URL } from '../../api';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
 
@@ -7,7 +8,7 @@ const Newsletter = () => {
 
     const handleSubscribe = async () => {
         try {
-            const response = await fetch('https://job-nest-server-zeta.vercel.app/subscribe', {
+            const response = await fetch(`${API_URL}/subscribe`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

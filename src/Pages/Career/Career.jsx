@@ -10,7 +10,7 @@ const Career = ({ blogs }) => {
     // const blogs = useLoaderData();
     // console.log(blogs);
 
-    // fetch(`${import.meta.env.VITE_API_URL}/career-blog`)
+    // fetch(`${API_URL}/career-blog`)
     //     .then(response => response.json())
     //     .then(data => {
     //         const responseData = data;

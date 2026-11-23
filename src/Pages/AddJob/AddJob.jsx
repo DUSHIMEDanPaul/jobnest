@@ -1,3 +1,4 @@
+import { API_URL } from '../../api';
 import { useContext, useState } from "react"
 import { AuthContext } from "../../Provider/AuthProvider/AuthProvider"
 import DatePicker from 'react-datepicker'
@@ -42,13 +43,14 @@ const AddJob = () => {
             },
             postingDate,
             salary_range,
+            salaryRange: salary_range,
             title,
             applicantsNumber,
 
         }
         try {
             const { data } = await axios.post(
-                `${import.meta.env.VITE_API_URL}/alljob`,
+                `${API_URL}/alljob`,
                 jobData
             )
             // console.log(data)
@@ -59,7 +61,11 @@ const AddJob = () => {
             });
             navigate('/my-jobs')
         } catch (err) {
-            // console.log(err)
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Could not post the job. Please try again.',
+            });
         }
     }
 
@@ -138,10 +144,10 @@ const AddJob = () => {
                                 id='category'
                                 className='border p-2 rounded-md'
                             >
-                                <option value='On-time Job'>On-time Job</option>
+                                <option value='On-Site Job'>On-Site Job</option>
                                 <option value='Remote Job'>Remote Job</option>
                                 <option value='Hybrid Job'>Hybrid Job</option>
-                                <option value='Part-time Job'>Part-time Job</option>
+                                <option value='Part-Time Job'>Part-Time Job</option>
                             </select>
                         </div>
 

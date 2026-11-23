@@ -1,3 +1,4 @@
+import { API_URL } from '../../api';
 import Slider from "../Slider/Slider";
 import TabSection from "../Tabs/TabSection";
 import Fquestion from "../../Pages/Queastion/Fquestion";
@@ -12,7 +13,7 @@ const Home = () => {
     const [blogs, setblogs] = useState([]);
 
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_URL}/alljob`)
+        fetch(`${API_URL}/alljob`)
             .then(response => response.json())
             .then(data => {
                 setalljob(data);
@@ -21,7 +22,7 @@ const Home = () => {
                 console.error('Error fetching data for Alljob:', error);
             });
 
-        fetch(`${import.meta.env.VITE_API_URL}/career-blog`)
+        fetch(`${API_URL}/career-blog`)
             .then(response => response.json())
             .then(data => {
                 setblogs(data);

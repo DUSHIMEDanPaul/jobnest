@@ -1,3 +1,4 @@
+import { API_URL } from '../../api';
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider/AuthProvider";
 import axios from "axios";
@@ -10,15 +11,19 @@ const AppliedJob = () => {
     const [jobs, setJobs] = useState([])
 
     useEffect(() => {
+        if (!user?.email) return
         const getData = async () => {
-            const { data } = await axios(
-                `${import.meta.env.VITE_API_URL}/apply/${user?.email}`
-            )
-            setJobs(data)
+            try {
+                const { data } = await axios(
+                    `${API_URL}/apply/${encodeURIComponent(user.email)}`
+                )
+                setJobs(Array.isArray(data) ? data : [])
+            } catch {
+                setJobs([])
+            }
         }
         getData()
     }, [user])
-    console.log(jobs);
 
 
     return (
@@ -58,6 +63,9 @@ const AppliedJob = () => {
                                     <table className='min-w-full divide-y divide-gray-200'>
                                         <thead className='bg-gray-50'>
                                             <tr>
+                                                <th scope='col' className='py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500'>
+                                                    Job
+                                                </th>
                                                 <th
                                                     scope='col'
                                                     className='py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500'
@@ -88,6 +96,10 @@ const AppliedJob = () => {
                                             {
                                                 jobs.map(job => (
                                                     <tr key={job._id}>
+                                                        <td className='px-4 py-4 text-sm text-sky-700 font-medium whitespace-nowrap'>
+                                                            {job.jobTitle || '—'}
+                                                        </td>
+
                                                         <td className='px-4 py-4 text-sm text-gray-500  whitespace-nowrap'>
                                                             {job.name}
                                                         </td>
@@ -125,12 +137,11 @@ const AppliedJob = () => {
                         document={<AppliedPdf jobs={jobs} />}
                         fileName="applied_jobs_summary.pdf"
                     >
-                        <button className='top-0 my-0 px-8 btn py-2.5 leading-5 text-white transition-colors duration-300 transhtmlForm bg-sky-600 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600'>
-                            Download Summary
-                            {({ loading }) =>
-                                loading ? 'Loading document...' : 'Download Summary'
-                            }
-                        </button>
+                        {({ loading }) => (
+                            <span className='inline-block px-8 btn py-2.5 leading-5 text-white transition-colors duration-300 bg-sky-600 rounded-md hover:bg-gray-600'>
+                                {loading ? 'Preparing document...' : 'Download Summary'}
+                            </span>
+                        )}
                     </PDFDownloadLink>
 
                 </div>

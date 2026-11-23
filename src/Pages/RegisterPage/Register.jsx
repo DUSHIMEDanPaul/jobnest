@@ -1,3 +1,4 @@
+import { API_URL } from '../../api';
 import { useContext, useState } from "react";
 
 import { useForm } from "react-hook-form";
@@ -55,7 +56,7 @@ const Register = () => {
                 navigate(from);
                 const createdAt = result.user?.metadata?.creationTime;
                 const user = { email, createdAt: createdAt };
-                fetch('https://job-nest-server-zeta.vercel.app', {
+                fetch(API_URL, {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

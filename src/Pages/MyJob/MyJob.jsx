@@ -1,4 +1,5 @@
-import { useContext, useEffect, useState } from "react"
+import { API_URL } from '../../api';
+import { useCallback, useContext, useEffect, useState } from "react"
 import { AuthContext } from "../../Provider/AuthProvider/AuthProvider"
 import axios from "axios"
 import Swal from "sweetalert2"
@@ -8,27 +9,21 @@ const MyJob = () => {
     const { user } = useContext(AuthContext)
     const [jobs, setJobs] = useState([])
 
-    // useEffect(() => {
-    //     const getData = async () => {
-    //         const { data } = await axios(
-    //             `${import.meta.env.VITE_API_URL}/jobs/${user?.email}`
-    //         )
-    //         setJobs(data)
-    //     }
-    //     getData()
-    // }, [user])
-    // console.log(jobs);
+    const getData = useCallback(async () => {
+        if (!user?.email) return
+        try {
+            const { data } = await axios(
+                `${API_URL}/jobs/${encodeURIComponent(user.email)}`
+            )
+            setJobs(Array.isArray(data) ? data : [])
+        } catch {
+            setJobs([])
+        }
+    }, [user])
 
     useEffect(() => {
         getData()
-    }, [user])
-
-    const getData = async () => {
-        const { data } = await axios(
-            `${import.meta.env.VITE_API_URL}/jobs/${user?.email}`
-        )
-        setJobs(data)
-    }
+    }, [getData])
 
     const handleDelete = async id => {
         try {
@@ -44,7 +39,7 @@ const MyJob = () => {
 
             if (result.isConfirmed) {
                 const { data } = await axios.delete(
-                    `${import.meta.env.VITE_API_URL}/job/${id}`
+                    `${API_URL}/job/${id}`
                 );
 
                 Swal.fire({
@@ -158,7 +153,7 @@ const MyJob = () => {
                                                     </td>
 
                                                     <td className='px-4 py-4 text-sm text-gray-500  whitespace-nowrap'>
-                                                        {job.salaryRange}
+                                                        {job.salaryRange ?? job.salary_range}
                                                     </td>
                                                     <td className='px-4 py-4 text-sm whitespace-nowrap'>
                                                         <div className='flex items-center gap-x-2'>

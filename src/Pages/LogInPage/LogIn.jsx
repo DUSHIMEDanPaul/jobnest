@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 const LogIn = () => {
     const { signInUser } = useContext(AuthContext)
@@ -17,7 +18,7 @@ const LogIn = () => {
     // navigation systems
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location?.state || "/";
+    const from = location.state?.from?.pathname || "/";
 
     const onSubmit = (data) => {
         const { email, password } = data;
@@ -26,8 +27,15 @@ const LogIn = () => {
         signInUser(email, password)
             .then(result => {
                 if (result.user) {
-                    navigate(from);
+                    navigate(from, { replace: true });
                 }
+            })
+            .catch(() => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Login failed',
+                    text: 'Invalid email or password. Please try again.',
+                });
             });
     };
 

@@ -15,7 +15,7 @@ const TabSection = ({ alljob }) => {
             </p>
             <Tabs >
                 <TabList>
-                    <Tab>On-Site JOb</Tab>
+                    <Tab>On-Site Job</Tab>
                     <Tab>Remote Job</Tab>
                     <Tab>Hybrid Job</Tab>
                     <Tab>Part-Time Job</Tab>
@@ -24,7 +24,7 @@ const TabSection = ({ alljob }) => {
                 <div className=" p-6 mx-auto space-y-6 sm:space-y-12">
                     <TabPanel>
                         <div className="grid justify-center grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                            {alljob.filter(j => j.category === 'On Site')
+                            {alljob.filter(j => j.category === 'On-Site Job')
                                 .map(job => (
                                     <JobCard key={job._id} job={job} />
                                 ))}
@@ -34,7 +34,7 @@ const TabSection = ({ alljob }) => {
 
                     <TabPanel>
                         <div className="grid justify-center grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                            {alljob.filter(j => j.category === 'Remote')
+                            {alljob.filter(j => j.category === 'Remote Job')
                                 .map(job => (
                                     <JobCard key={job._id} job={job} />
                                 ))}
@@ -44,7 +44,7 @@ const TabSection = ({ alljob }) => {
 
                     <TabPanel>
                         <div className="grid justify-center grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                            {alljob.filter(j => j.category === 'Hybrid')
+                            {alljob.filter(j => j.category === 'Hybrid Job')
                                 .map(job => (
                                     <JobCard key={job._id} job={job} />
                                 ))}
@@ -54,7 +54,7 @@ const TabSection = ({ alljob }) => {
 
                     <TabPanel>
                         <div className="grid justify-center grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                            {alljob.filter(j => j.category === 'Part-Time')
+                            {alljob.filter(j => j.category === 'Part-Time Job')
                                 .map(job => (
                                     <JobCard key={job._id} job={job} />
                                 ))}

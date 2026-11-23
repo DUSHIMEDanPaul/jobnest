@@ -7,6 +7,7 @@ const AppliedJobPDF = ({ jobs }) => (
         <Text style={{ fontSize: 16, fontWeight: 'bold', marginBottom: 10,color: 'blue' }}>Applied Job Summary</Text>
         {jobs.map(job => (
           <View key={job._id} style={{ fontSize: 12, marginBottom: 5 }}>
+            <Text>Job: {job.jobTitle || "-"}</Text>
             <Text>Name: {job.name}</Text>
             <Text>Email: {job.email}</Text>
             <Text>Resume Link: {job.resumeLink}</Text>
